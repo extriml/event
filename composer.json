@@ -8,7 +8,6 @@
             "email": "i@alexxorlovv.name"
         }
     ],
-    "require": {},
     "autoload": {
         "psr-4": {
         "elise\\events\\": ""
