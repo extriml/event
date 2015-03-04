@@ -11,8 +11,15 @@
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
-"psr-4": {
-"elise\\events\\": ""
-}
-}
+        "psr-4": {
+        "elise\\events\\": ""
+        }
+    },
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.0"
+        }
 }
