@@ -1,14 +1,14 @@
 <?php
 /**
- * Event
- * @package events
- * @subpackage  elise
- * @author Alex Orlov <mail@alexxorlovv.name>
- * @version 1.0.0
- * @since 2015-02-28
- * @license   MIT
- * @copyright  2015 extriml
- */
+     * Event
+     * @package events
+     * @subpackage  elise
+     * @author Alex Orlov <mail@alexxorlovv.name>
+     * @version 1.0.0
+     * @since 2015-02-28
+     * @license   MIT
+     * @copyright  2015 extriml
+     */
 namespace elise\events;
 
 use elise\events\exceptions\InvalidArgumentException;
@@ -97,7 +97,7 @@ class Event
             throw new InvalidArgumentException("Invalid parameter soruce");
             
         }
-         $this->source = $source;
+            $this->source = $source;
     }
 
     /**
