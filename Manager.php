@@ -101,7 +101,7 @@ class Manager implements ManagerAwareInterface
     /**
      * Run Event
      * @param  string  $eventType
-     * @param  object  $source   
+     * @param  object|null  $source   
      * @param  mixed  $data      
      * @param  boolean $canceled 
      * @return null
