@@ -12,7 +12,7 @@
 
 namespace elise\events\interfaces;
 
-interface Event
+interface EventInterface
 {
     
 }

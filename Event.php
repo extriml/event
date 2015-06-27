@@ -69,7 +69,7 @@ class Event
      */
     function setData($data)
     {
-        if (is_null($data) === false and is_array($data) === true) {
+        if (is_null($data) === false && is_array($data) === true) {
             $this->data = $data; 
             return; 
         } 
@@ -93,7 +93,7 @@ class Event
      */
     function setSource($source)
     {
-        if (is_object($source) === false and is_null($source) === false) {
+        if (is_object($source) === false && is_null($source) === false) {
             throw new InvalidArgumentException("Invalid parameter soruce");
             
         }

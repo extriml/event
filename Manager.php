@@ -18,7 +18,7 @@ use elise\events\Collection;
 use elise\events\Listener;
 use elise\events\exceptions\InvalidArgumentException;
 use elise\events\exceptions\ListenerNotFoundException;
-use elise\events\interfaces\Manager as ManagerAwareInterface;
+use elise\events\interfaces\ManagerInterface as ManagerAwareInterface;
 
 class Manager implements ManagerAwareInterface
 {
@@ -113,7 +113,7 @@ class Manager implements ManagerAwareInterface
         if (strpos($eventType, ":") === false) {
             throw new InvalidArgumentException("Invalid Event Type");
         }
-        if (is_object($source) === false and is_null($source) === false) {
+        if (is_object($source) === false && is_null($source) === false) {
             throw new InvalidArgumentException("Invalid Handler");
         }
         if (is_bool($canceled) === false) {
@@ -137,7 +137,7 @@ class Manager implements ManagerAwareInterface
         $responses = array();
 
         foreach ($collection as $value) {
-            if ($eventName !== $value->getName() and $value->isGlobal() === false) {
+            if ($eventName !== $value->getName() && $value->isGlobal() === false) {
                 continue;
             }
             if ($value->allowed() === false) {
@@ -145,7 +145,6 @@ class Manager implements ManagerAwareInterface
             }
 
             $handler = $value->getHandler();
-            $name = $value->getName();
             $parameters = array($event, $source, $data);
 
             if (is_callable($handler) === true) {
@@ -180,7 +179,7 @@ class Manager implements ManagerAwareInterface
      */
     public function on($eventType, $handler, $priority = self::NORMAL)
     {
-        if (is_object($handler) === false AND 
+        if (is_object($handler) === false && 
             is_callable($handler) === false) {
             throw new InvalidArgumentException("Invalid Handler");
         }

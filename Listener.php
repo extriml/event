@@ -12,8 +12,6 @@
 
 namespace elise\events;
 
-use elise\events\Manager;
-use elise\events\Collection;
 use elise\events\exceptions\InvalidArgumentException;
 
 
@@ -55,7 +53,7 @@ class Listener
      */
     function __construct($handler, $eventName = null)
     {
-        if (is_object($handler) === false AND 
+        if (is_object($handler) === false && 
             is_callable($handler) === false) {
             throw new InvalidArgumentException("Not a valid handler type"); 
         }
@@ -78,7 +76,7 @@ class Listener
      */
     function allowed($allowed = null)
     {
-        if (is_null($allowed) === false and is_bool($allowed) === false) {
+        if (is_null($allowed) === false && is_bool($allowed) === false) {
             throw new InvalidArgumentException("Listener allowed error type");
         }
 
