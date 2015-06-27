@@ -51,7 +51,7 @@ class Listener
      * @param mixed $handler
      * @param string $eventName
      */
-    function __construct($handler, $eventName = null)
+    public function __construct($handler, $eventName = null)
     {
         if (is_object($handler) === false && 
             is_callable($handler) === false) {
@@ -74,7 +74,7 @@ class Listener
      * @param  null | bool $allowed
      * @return null | bool
      */
-    function allowed($allowed = null)
+    public function allowed($allowed = null)
     {
         if (is_null($allowed) === false && is_bool($allowed) === false) {
             throw new InvalidArgumentException("Listener allowed error type");
@@ -91,7 +91,7 @@ class Listener
      * Get type listener
      * @return bool
      */
-    function isGlobal()
+    public function isGlobal()
     {
         return $this->globaly;
     }
@@ -100,7 +100,7 @@ class Listener
      * Get name listener
      * @return string
      */
-    function getName()
+    public function getName()
     {
         return $this->name;
     }
@@ -109,7 +109,7 @@ class Listener
      * Get handler listener
      * @return mixed
      */
-    function getHandler()
+    public function getHandler()
     {
         return $this->handler;
     }

@@ -50,7 +50,6 @@ class Manager implements ManagerAwareInterface
      * Init manager
      * @param boolean $priority     
      * @param boolean $responseable
-     * @return  void
      */
     public function __construct($priority = false, $responseable = false)
     {
@@ -216,7 +215,7 @@ class Manager implements ManagerAwareInterface
     /**
      * Getting  listeners
      * @param  string $eventType
-     * @return string           
+     * @return array           
      */
     public function getListeners($eventType)
     {

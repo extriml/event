@@ -54,7 +54,7 @@ class Event
      * @param array | null  $data    
      * @param bool $cancelable
      */
-    function __construct($type, $source, $data = null, $cancelable = true)
+    public function __construct($type, $source, $data = null, $cancelable = true)
     {
         $this->setType($type);
         $this->setSource($source);
@@ -67,7 +67,7 @@ class Event
      * Data setting
      * @param array | null $data
      */
-    function setData($data)
+    public function setData($data)
     {
         if (is_null($data) === false && is_array($data) === true) {
             $this->data = $data; 
@@ -81,7 +81,7 @@ class Event
      * Data getting
      * @return mixed
      */
-    function getData()
+    public function getData()
     {
         return $this->data;
     }
@@ -91,7 +91,7 @@ class Event
      * @param object | null $source
      * @return void
      */
-    function setSource($source)
+    public function setSource($source)
     {
         if (is_object($source) === false && is_null($source) === false) {
             throw new InvalidArgumentException("Invalid parameter soruce");
@@ -104,7 +104,7 @@ class Event
      * Source getting
      * @return object | null
      */
-    function getSource()
+    public function getSource()
     {
         return $this->source;
     }
@@ -114,7 +114,7 @@ class Event
      * @param string $type
      * @return void
      */
-    function setType($type)
+    public function setType($type)
     {
         if (is_string($type) === false) {
             throw new InvalidArgumentException("Invalid parameter type");       
@@ -126,7 +126,7 @@ class Event
      * Type getting
      * @return string
      */
-    function getType()
+    public function getType()
     {
         return $this->type;
     }
@@ -136,7 +136,7 @@ class Event
      * Is Cancelable?
      * @return bool
      */
-    function isCancelable()
+    public function isCancelable()
     {
         return (bool) $this->cancelable;
     }
@@ -145,7 +145,7 @@ class Event
      * Cancelable getting
      * @return bool
      */
-    function getCancelabe()
+    public function getCancelabe()
     {
         return $this->cancelable;
     }
@@ -155,7 +155,7 @@ class Event
      * @param bool $cancel
      * @return void
      */
-    function setCancelable($cancel)
+    public function setCancelable($cancel)
     {
         if (is_bool($cancel) === false) {
             throw new InvalidArgumentException("Invalid parameter cancelable");
@@ -167,7 +167,7 @@ class Event
      * Stopping event
      * @return void
      */
-    function stop()
+    public function stop()
     {
         if ($this->cancelable === true) {
             $this->stopped = true;   
@@ -181,7 +181,7 @@ class Event
      * Is stopped event?
      * @return bool
      */
-    function isStopped()
+    public function isStopped()
     {
         return $this->stopped;
     }

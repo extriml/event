@@ -12,7 +12,7 @@
 
 namespace elise\events;
 
-class Collection implements \Iterator,\Countable
+class Collection implements \Iterator, \Countable
 {
 
     /**
