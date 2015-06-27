@@ -100,7 +100,7 @@ class Collection implements \Iterator, \Countable
     {
         if ($this->priority() === true) {
             arsort($this->priority);  
-        }else {
+        } else {
             ksort($this->priority);
         }  
     }
