@@ -12,7 +12,7 @@
 
 namespace elise\events\interfaces;
 
-interface Manager
+interface ManagerInterface
 {
 	/**
      * Priority Levels

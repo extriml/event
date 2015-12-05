@@ -17,4 +17,4 @@ use elise\base\Exception as BaseException;
 class Exception extends BaseException
 {
 
-} 
+}

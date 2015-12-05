@@ -1,7 +1,7 @@
 <?php
 /**
- * Interface Event
- * @package interfaces
+ * Listener not found exception
+ * @package exceptions
  * @subpackage  elise.events
  * @author Alex Orlov <mail@alexxorlovv.name>
  * @version 1.0.0
@@ -10,9 +10,9 @@
  * @copyright  2015 extriml
  */
 
-namespace elise\events\interfaces;
+namespace elise\events\exceptions;
 
-interface Event
+class ListenerNotFoundException extends \ErrorException 
 {
-    
+
 }

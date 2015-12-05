@@ -18,7 +18,7 @@ use elise\events\Collection;
 use elise\events\Listener;
 use elise\events\exceptions\InvalidArgumentException;
 use elise\events\exceptions\ListenerNotFoundException;
-use elise\events\interfaces\Manager as ManagerAwareInterface;
+use elise\events\interfaces\ManagerInterface as ManagerAwareInterface;
 
 class Manager implements ManagerAwareInterface
 {
@@ -50,12 +50,11 @@ class Manager implements ManagerAwareInterface
      * Init manager
      * @param boolean $priority     
      * @param boolean $responseable
-     * @return  void
      */
     public function __construct($priority = false, $responseable = false)
     {
         $this->priority = $priority;
-        $this->responseable =$responseable;
+        $this->responseable = $responseable;
     }
 
 
@@ -102,7 +101,7 @@ class Manager implements ManagerAwareInterface
     /**
      * Run Event
      * @param  string  $eventType
-     * @param  object  $source   
+     * @param  object|null  $source   
      * @param  mixed  $data      
      * @param  boolean $canceled 
      * @return null
@@ -110,17 +109,17 @@ class Manager implements ManagerAwareInterface
     public function run($eventType, $source = null, $data = array(), $canceled = true)
     {
       
-        if (strpos($eventType,":") === false) {
+        if (strpos($eventType, ":") === false) {
             throw new InvalidArgumentException("Invalid Event Type");
         }
-        if (is_object($source) === false and is_null($source) === false) {
+        if (is_object($source) === false && is_null($source) === false) {
             throw new InvalidArgumentException("Invalid Handler");
         }
         if (is_bool($canceled) === false) {
             throw new InvalidArgumentException("Invalid Canceled");
         }
 
-        list($collectionName,$eventName) = $this->exportFormat($eventType);
+        list($collectionName, $eventName) = $this->exportFormat($eventType);
 
         if (isset($this->events[$collectionName]) === false) {
             return;
@@ -137,7 +136,7 @@ class Manager implements ManagerAwareInterface
         $responses = array();
 
         foreach ($collection as $value) {
-            if ($eventName !== $value->getName() and $value->isGlobal() === false) {
+            if ($eventName !== $value->getName() && $value->isGlobal() === false) {
                 continue;
             }
             if ($value->allowed() === false) {
@@ -145,16 +144,15 @@ class Manager implements ManagerAwareInterface
             }
 
             $handler = $value->getHandler();
-            $name = $value->getName();
-            $parameters = array($event,$source,$data);
+            $parameters = array($event, $source, $data);
 
             if (is_callable($handler) === true) {
-                array_push($responses,call_user_func_array($handler,$parameters));
+                array_push($responses, call_user_func_array($handler, $parameters));
             }
 
             elseif (is_object($handler) === true) {
-                if (method_exists($handler,$eventName)) {
-                    array_push($responses,call_user_func_array(array($handler,$eventName),$parameters));
+                if (method_exists($handler, $eventName)) {
+                    array_push($responses, call_user_func_array(array($handler, $eventName), $parameters));
                 }     
             }
            
@@ -180,7 +178,7 @@ class Manager implements ManagerAwareInterface
      */
     public function on($eventType, $handler, $priority = self::NORMAL)
     {
-        if (is_object($handler) === false AND 
+        if (is_object($handler) === false && 
             is_callable($handler) === false) {
             throw new InvalidArgumentException("Invalid Handler");
         }
@@ -189,7 +187,7 @@ class Manager implements ManagerAwareInterface
             throw new InvalidArgumentException("Invalid priority");
         }
 
-        list($collectionName,$eventName) = $this->exportFormat($eventType);
+        list($collectionName, $eventName) = $this->exportFormat($eventType);
         
         if (isset($this->events[$collectionName]) === false) {
             $this->events[$collectionName] = new Collection();
@@ -206,10 +204,10 @@ class Manager implements ManagerAwareInterface
      */
     public function exportFormat($eventType)
     {
-        if(is_string($eventType) === false) {
+        if (is_string($eventType) === false) {
             throw new InvalidArgumentException("Error -allowedListeners eventType  type invalid. ");
         }
-        return explode(":",strtolower(trim($eventType)));
+        return explode(":", strtolower(trim($eventType)));
     }
 
 
@@ -217,13 +215,13 @@ class Manager implements ManagerAwareInterface
     /**
      * Getting  listeners
      * @param  string $eventType
-     * @return string           
+     * @return array           
      */
     public function getListeners($eventType)
     {
 
 
-        list($collectionName,$eventName) = $this->exportFormat($eventType);
+        list($collectionName, $eventName) = $this->exportFormat($eventType);
         
         if (is_null($eventName) === true) {
             if (isset($this->events[$collectionName])) {
@@ -236,7 +234,7 @@ class Manager implements ManagerAwareInterface
         if (isset($this->events[$collectionName]) === true) {
             foreach ($this->events[$collectionName] as $value) {
                 if ($eventName == $value->getName()) {
-                    array_push($listeners,$value);
+                    array_push($listeners, $value);
                 }
             
             }
@@ -253,7 +251,7 @@ class Manager implements ManagerAwareInterface
     public function hasListeners($eventType)
     {
 
-        list($collectionName,$eventName) = $this->exportFormat($eventType);
+        list($collectionName, $eventName) = $this->exportFormat($eventType);
         
         if (is_null($eventName) === true) {  
             if (isset($this->events[$collectionName]) === false) {
@@ -280,7 +278,7 @@ class Manager implements ManagerAwareInterface
     public function dettach($eventType)
     {
 
-       list($collectionName,$eventName) = $this->exportFormat($eventType);
+       list($collectionName, $eventName) = $this->exportFormat($eventType);
 
         if (is_null($eventName) === true) {  
             if (isset($this->events[$collectionName]) === false) {
@@ -308,13 +306,13 @@ class Manager implements ManagerAwareInterface
         $this->dettach($eventType);
     }
 
-    public function allowedListeners($eventType,$allowed)
+    public function allowedListeners($eventType, $allowed)
     {
         if (is_bool($allowed) === false) {
             throw new InvalidArgumentException("Error - allowedListeners allowed type invalid.");
         }
 
-        list($collectionName,$eventName) = $this->exportFormat($eventType);
+        list($collectionName, $eventName) = $this->exportFormat($eventType);
 
         if (is_null($eventName) === true) {  
             if (isset($this->events[$collectionName]) === false) {

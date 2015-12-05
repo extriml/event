@@ -12,7 +12,7 @@
 
 namespace elise\events;
 
-class Collection implements \Iterator,\Countable
+class Collection implements \Iterator, \Countable
 {
 
     /**
@@ -100,7 +100,7 @@ class Collection implements \Iterator,\Countable
     {
         if ($this->priority() === true) {
             arsort($this->priority);  
-        }else {
+        } else {
             ksort($this->priority);
         }  
     }
